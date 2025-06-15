@@ -53,7 +53,7 @@ function App() {
 
   return (
     <div style={{ padding: '1em', fontFamily: 'sans-serif' }}>
-      <h1>EatScan</h1>
+      <h1>eatscan2</h1>
       <p>食品ラベルを撮影して成分を読み取ります。</p>
 
       {/* <ImageUploader onImageSelected={handleImageSelected} /> */}
