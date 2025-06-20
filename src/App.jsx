@@ -61,21 +61,6 @@ function App() {
         </>
       )
       }
-      {/* {nutrients && (
-        <>
-          <h3>栄養成分（Gemini構造化結果）</h3>
-          <table>
-            <tbody>
-              {Object.entries(nutrients).map(([key, value]) => (
-                <tr key={key}>
-                  <td>{key}</td>
-                  <td>{value}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </>
-      )} */}
     </div>
   );
 }
