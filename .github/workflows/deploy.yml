@@ -29,12 +29,14 @@ jobs:
       - name: Build
         run: npm run build
 
-
       - name: LS
         run: ls -lr
+
+      - name: PWD
+        run: pwd
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: /eatscan2-frontend/dist
+          publish_dir: ./dist
