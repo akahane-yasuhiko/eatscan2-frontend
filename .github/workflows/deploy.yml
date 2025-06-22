@@ -35,6 +35,9 @@ jobs:
       - name: LS
         run: ls dist -lR
 
+      - name: LS2
+        run: ls /home/runner/work/eatscan2-frontend/eatscan2-frontend/dist -lR
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
