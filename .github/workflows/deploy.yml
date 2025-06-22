@@ -22,16 +22,17 @@ jobs:
 
       - name: Install dependencies
         run: npm install
-        working-directory: eatscan2-frontend
 
       - name: Copy .env.public to .env
         run: cp .env.public .env
-        working-directory: eatscan2-frontend
 
       - name: Build
         run: npm run build
-        working-directory: eatscan2-frontend
-        
+
+
+      - name: LS
+        run: ls -lr
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
