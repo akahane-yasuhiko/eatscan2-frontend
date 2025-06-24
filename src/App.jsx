@@ -1,10 +1,35 @@
 import { useState } from 'react';
+import GoogleLoginButton from "./components/GoogleLoginButton";
 import { analyzeWithGemini } from './utils/api';
 
 function App() {
+  const [user, setUser] = useState(null);
+  const [error, setError] = useState("");
   const [nutrients, setNutrients] = useState('');
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+
+  const handleLogin = async (idToken) => {
+    try {
+      const response = await fetch("https://us-central1-eatscan-459714.cloudfunctions.net/verify_token", {
+        method: "POST",
+        mode: "cors",
+        headers: {
+          "Authorization": `Bearer ${idToken}`,
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error("Token verification failed");
+      }
+
+      const data = await response.json();
+      setUser(data);  // { userId, email }
+      setError("");
+    } catch (err) {
+      console.error(err);
+      setError("認証エラー: " + err.message);
+    }
+  };
 
   const handleFileUpload = async (event) => {
     const file = event.target.files[0];
@@ -32,6 +57,20 @@ function App() {
   return (
     <div style={{ padding: '1rem' }}>
       <h1>EatScan 2</h1>
+
+      {!user ? (
+        <>
+          <p>Google アカウントでログインしてください。</p>
+          <GoogleLoginButton onLogin={handleLogin} />
+          {error && <p style={{ color: "red" }}>{error}</p>}
+        </>
+      ) : (
+        <>
+          <p>こんにちは、{user.email} さん！</p>
+          <p>ユーザーID: {user.userId}</p>
+        </>
+      )}
+
       <input type="file" accept="image/*" onChange={handleFileUpload} />
       {loading && <p>読み取り中...</p>}
       {error && <p style={{ color: 'red' }}>{error}</p>}
