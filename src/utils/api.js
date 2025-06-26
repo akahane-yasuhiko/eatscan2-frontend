@@ -4,6 +4,10 @@ export async function analyzeWithVision(file) {
 
   const response = await fetch(import.meta.env.VITE_VISION_API_URL, {
     method: 'POST',
+    headers: {
+      "Authorization": `Bearer ${idToken}`
+      // Content-Type は FormData 使用時は自動で設定される
+    },
     body: formData, // Content-Type は fetch が自動で multipart/form-data に設定
   });
 
@@ -21,6 +25,10 @@ export async function analyzeWithGemini(file) {
 
   const response = await fetch(import.meta.env.VITE_GEMINI_API_URL, {
     method: 'POST',
+    headers: {
+      "Authorization": `Bearer ${idToken}`
+      // Content-Type は FormData 使用時は自動で設定される
+    },
     body: formData, // Content-Type は fetch が自動で multipart/form-data に設定
   });
 

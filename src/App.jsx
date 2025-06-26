@@ -22,6 +22,7 @@ function App() {
         throw new Error("Token verification failed");
       }
 
+      sessionStorage.setItem("idToken", idToken);
       const data = await response.json();
       setUser(data);  // { userId, email }
       setError("");
@@ -40,7 +41,8 @@ function App() {
     setNutrients('');
 
     try {
-      const geminiResult = await analyzeWithGemini(file);
+      const idToken = sessionStorage.getItem("idToken");
+      const geminiResult = await analyzeWithGemini(file, idToken);
 
       console.log(geminiResult.raw_gemini_output);
       setNutrients(geminiResult.raw_gemini_output)
