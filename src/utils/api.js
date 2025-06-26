@@ -1,4 +1,4 @@
-export async function analyzeWithVision(file) {
+export async function analyzeWithVision(file, idToken) {
   const formData = new FormData();
   formData.append('file', file, file.name);
 
@@ -19,7 +19,7 @@ export async function analyzeWithVision(file) {
 }
 
 
-export async function analyzeWithGemini(file) {
+export async function analyzeWithGemini(file, idToken) {
   const formData = new FormData();
   formData.append('file', file, file.name);
 
